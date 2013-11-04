@@ -1,23 +1,23 @@
 <?php
 /**
+ * au_group_tag_menu
  * get settings for the tag menu
  * need the tags themselves
  * to limit results to a specific user's posts
 */
 
-//get current settings
-	//$group = elgg_extract("entity", $vars);
+	//get current settings
 	$group = elgg_get_page_owner_entity();
 
 	if(!empty($group) && elgg_instanceof($group, "group")){
-		// build form
+		// build form to enter tags
 		if (!$group->menu_tags){
-			//populate with existing group tags
+			//populate with top existing group tags
 			$options = array(
 			'container_guids' => $group->getGUID(),
 			'types' => 'object',
 			'threshold' => 0,
-			'limit' => 20,
+			'limit' => 5,
 			'tag_names' => $group->tags,
 			'order_by' => 'tag ASC',
 			);
@@ -28,27 +28,23 @@
 		}
 		$form_body="<div>";
 		$form_body.="<label for='group_tags'>".elgg_echo('au_group_tag_menu:tags')."</label>";
+		$form_body.="<p>".elgg_echo('au_group_tag_menu:tagblurb')."</p>";
 		$form_body.= elgg_view('input/tags', array(
 			'name' => 'menu_tags',
 			'id' => 'menu_tags',
 			'value' => $menutags,
 		));
-	// cannot figure out how to control position of menu so commented out this bit
-	//	$form_body.="<label for='group_menu_position'>".elgg_echo('au_group_tag_menu:menuposition')."</label>";
-		//drodown box for top/bottom menu - may extend later if I can figure out alternative positions!
-	//	$options=array('top'=>'top','bottom'=>'bottom');		
-	//	$form_body.=elgg_view("input/dropdown", array ("name"=>"menu_position",
-	//													"id"=>"menu_position",
-	//													"options_values"=>$options,
-	//													));		
-		$form_body.="<label for='group_menu_maxtags'>".elgg_echo('au_group_tag_menu:maxtags')."</label>";
-		//drodown box for top/bottom menu - may extend later if I can figure out alternative positions!
-		$options=array('5'=>'5','10'=>'10','15'=>'15','20'=>'20','30'=>'30','50'=>'50');		
+		$form_body.="</div><div>";
+		//select the number of tags to show if using auto menu	
+		$form_body.="<label for='menu_maxtags'>".elgg_echo('au_group_tag_menu:maxtags')."</label> ";
+		$menumax= $group->menu_maxtags;
+		$options=array('1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','15'=>'15','20'=>'20','25'=>'25','30'=>'30','40'=>'40','50'=>'50');		
 		$form_body.=elgg_view("input/dropdown", array ("name"=>"menu_maxtags",
 														"id"=>"menu_maxtags",
 														"options_values"=>$options,
+														"value" => $menumax,
 														));		
-
+		$form_body.="</p>";
 		$form_body.="</div>";
 		$form_body .= "<div class='elgg-foot'>";
 		$form_body .= elgg_view("input/hidden", array("name" => "guid", "value" => $group->getGUID()));
@@ -60,8 +56,5 @@
 		echo elgg_view_module("info", $title, $body);
 
 	}
-//show tag entry form
-
-
-//select user from group - default is all
+// to do at some point - select specific user, select specific type of post to show
 

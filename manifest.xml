@@ -3,7 +3,7 @@
 	<name>Group Tag Menu</name>
 	<author>Jon Dron (jond@athabascau.ca)</author>
 	<version>1.0</version>
-	<description>Allows group owners to add a submenu for specified tags</description>
+	<description>Adds a group submenu of specified tags and displays the results in the group context. Also adds group tagcloud with integrated listing in the group.</description>
 	<website>https://landing.athabascau.ca/</website>
 	<copyright>(C) Athabasca University 2013</copyright>
 	<license>GNU General Public License version 2</license>
