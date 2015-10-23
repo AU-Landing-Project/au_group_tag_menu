@@ -46,60 +46,49 @@ if (!$group->menu_tags) {
 	$tags = $group->menu_tags;
 }
 
-
-
-//start setting up the owner block - note this 
-//is emulating the menu - needs to be separate from the actual menu
-
-$body = '<ul class="elgg-menu elgg-menu-owner-block elgg-menu-owner-block-default">';
-
-//add the title link that points to the group tagcloud ('all' is a special tag)
-$body .= '<li>';
-$body .= elgg_view('output/url', array(
+$priority = 10;
+elgg_register_menu_item('group_tag_menu', array(
+	'name' => 'all',
 	'text' => '<strong>' . elgg_echo('au_group_tag_menu:menu') . '</strong>',
-	'href' => "group_tag_menu/group/" . $group->guid . "/all"
+	'href' => "group_tag_menu/group/" . $group->guid . "/all",
+	'priority' => $priority
 ));
-$body .= '</li>';
 
-//as yet unused option to display as a tag cloud
-if ($group->menu_showastagcloud && !$group->menu_tags) {
 
-	$body .= elgg_view_tagcloud(array(
-		'$container_guids' => $group->guid,
-		'types' => 'object',
-		'threshold' => 0,
-		'limit' => $maxtags,
-		'tag_names' => array('tags'),
-	));
-}
 
 //  different arrays depending on whether tag cloud or saved menu tags	
 if (!$group->menu_tags) {
 	//using standard group tags so we have a tag cloud - multi-dimensional array
 	foreach ($tags as $key) {
-		$url = "group_tag_menu/group/" . $group->guid . "/" . urlencode($key->tag);
-		$taglink = elgg_view('output/url', array(
+		$priority += 10;
+		elgg_register_menu_item('group_tag_menu', array(
+			'name' => "tag:{$key->tag}",
 			'text' => ' - ' . $key->tag,
-			'href' => $url,
-			'title' => "$key->tag ($key->total)",
+			'href' => "group_tag_menu/group/" . $group->guid . "/" . urlencode($key->tag),
 			'rel' => 'tag',
+			'title' => "{$key->tag} ({$key->total})",
+			'priority' => $priority
 		));
-		$body .= '<li>' . $taglink . '</li>';
 	}
 } else {
 	//using menu tags so we just have a simple array of tags to read in
 	foreach ($tags as $key) {
-		$url = "group_tag_menu/group/" . $group->guid . "/" . urlencode($key);
-		$taglink = elgg_view('output/url', array(
+		$priority += 10;
+		elgg_register_menu_item('group_tag_menu', array(
+			'name' => "tag:{$key}",
 			'text' => ' - ' . $key,
-			'href' => $url,
-			'title' => "$key",
+			'href' => "group_tag_menu/group/" . $group->guid . "/" . urlencode($key),
 			'rel' => 'tag',
+			'title' => $key,
+			'priority' => $priority
 		));
-		$body .= '<li>' . $taglink . '</li>';
 	}
 }
-$body .= "</ul>";
+
+$body = elgg_view_menu('group_tag_menu', array(
+	'class' => 'elgg-menu-owner-block',
+	'sort_by' => 'priority'
+));
 
 //display the results
 echo elgg_view_module('aside', "", $body);

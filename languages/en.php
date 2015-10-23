@@ -17,8 +17,10 @@ return array(
 	'au_group_tag_menu:settings' => 'Tag menu settings',
 	'au_group_tag_menu:maxtags' => 'Maximum number of tags to display (only applies when no tags are explicitly provided)',
 	'au_group_tag_menu:noresults' => "No items found tagged with the selected tag yet.",
-	'au_group_tag_menu:title' => "Posts tagged with: ",
+	'au_group_tag_menu:title' => "Posts tagged with: \"%s\"",
 	'au_group_tag_menu:tagcloud' => "Tag cloud for this group ",
 	'au_group_tag_menu:saveerror' => 'There was an error saving the group menu tags - sorry about that',
 	'au_group_tag_menu:defaulton' => "Show the group tag menu by default in all groups: ",
+	'au_group_tag_menu:error:invalid:group' => "Invalid group",
+	'au_group_tag_menu:save:success' => "Group tag settings have been saved",
 );

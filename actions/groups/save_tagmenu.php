@@ -7,6 +7,7 @@ namespace AU\GroupTagMenu;
 $entity = get_entity(get_input('guid'));
 
 if (!$entity instanceof \ElggGroup || !$entity->canEdit()) {
+	register_error(elgg_echo('au_group_tag_menu:error:invalid:group'));
 	forward(REFERER);
 }
 
@@ -15,9 +16,7 @@ $tags = get_input("menu_tags");
 $entity->menu_tags = string_to_tag_array($tags);
 //save max tags
 $entity->menu_maxtags = get_input("menu_maxtags");
-//save it
-if (!$entity->save()) {
-	register_error(elgg_echo("au_group_tag_menu:saveerror"));
-}
+
+system_message(elgg_echo("au_group_tag_menu:save:success"));
 
 forward(REFERER);
