@@ -3,6 +3,7 @@
     <name>Group Tag Menu</name>
     <id>au_group_tag_menu</id>
     <author>Jon Dron (jond@athabascau.ca)</author>
+    <author>Matt Beckett (matt@mattbeckett.me)</author>
     <version>1.1.0</version>
     <description>Adds a group submenu of specified tags and displays the results in the group context. Also adds group tagcloud with integrated listing in the group.</description>
     <website>https://landing.athabascau.ca/</website>
