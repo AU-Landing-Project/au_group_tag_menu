@@ -1,4 +1,7 @@
 <?php
+
+namespace AU\GroupTagMenu;
+
 /**
  * Group tag menu
  * allows tags to become menu items in groups
@@ -7,9 +10,11 @@
  * GPL2 licence - see manifest.xml
  */
 
-elgg_register_event_handler('init', 'system', 'au_group_tag_menu_init');
+const PLUGIN_ID = 'au_group_tag_menu';
 
-function au_group_tag_menu_init() {
+elgg_register_event_handler('init', 'system', __NAMESPACE__ . '\\init');
+
+function init() {
 
 	// add settings for tools
 	elgg_extend_view('groups/edit','au_group_tag_menu/tagmenu_settings');
@@ -21,21 +26,18 @@ function au_group_tag_menu_init() {
 	add_group_tool_option("tag_menu",elgg_echo("au_group_tag_menu:enable"),true);
 
 	//register action to save settings
-	elgg_register_action("au_group_tag_menu/groups/save_tagmenu", dirname(__FILE__) . "/actions/groups/save_tagmenu.php");
+	elgg_register_action("au_group_tag_menu/groups/save_tagmenu", __DIR__ . "/actions/groups/save_tagmenu.php");
 
 	//register the tag type for menu tags
 	elgg_register_tag_metadata_name('menu_tags');
 
 	//register the page to show results
-	elgg_register_page_handler('group_tag_menu', 'au_group_tag_menu_page_handler');
-
-
-
+	elgg_register_page_handler('group_tag_menu', __NAMESPACE__ . '\\group_tag_menu_page_handler');
 }
 
 
 
-function au_group_tag_menu_page_handler($page,$identifier){
+function group_tag_menu_page_handler($page,$identifier){
 	
 	//show the page of search results
 	// assumes url of group/guid/tag
@@ -125,4 +127,3 @@ function au_group_tag_menu_page_handler($page,$identifier){
 	return true;
 	
 }
-

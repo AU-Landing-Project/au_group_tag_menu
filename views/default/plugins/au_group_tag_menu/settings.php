@@ -1,5 +1,7 @@
 <?php
 
+namespace AU\GroupTagMenu;
+
 // group_tag_menu default settings
 // can choose whether defaults to on or off
 
