@@ -32,7 +32,7 @@ if(!empty($group) && elgg_instanceof($group, "group")){
 			// make alphabetical
 			sort($tags);			
 		}else {
-			//use owner-set tags - note, not alphabetical - in order entered
+			//use owner-set tags. Do not sort - need to show in correct order
 			$tags=$group->menu_tags;
 			
 		}	
@@ -46,8 +46,20 @@ if(!empty($group) && elgg_instanceof($group, "group")){
 		
 		//add the title link that points to the group tagcloud ('all' is a special tag)
 		$url = elgg_get_site_url()."group_tag_menu/group/".$group->guid."/all";
-		$body.="<li><a href='$url' ><strong>".elgg_echo('au_group_tag_menu:menu')."</strong></a></li>";
-
+		$body.="<li><a href='$url'><strong>".elgg_echo('au_group_tag_menu:menu')."</strong></a></li>";
+		
+		//as yet unused option to display as a tag cloud
+		if ($group->menu_showastagcloud && !$group->menu_tags){
+			
+			$body .= elgg_view_tagcloud(array(
+						'$container_guids'=> $group->getGUID(),
+						'types'=>'object',
+						'threshold' => 0,
+						'limit' => $maxtags,
+						'tag_names' => array('tags'),
+						));
+		}
+		
 		//  different arrays depending on whether tag cloud or saved menu tags	
 		if (!$group->menu_tags){
 			//using standard group tags so we have a tag cloud - multi-dimensional array
