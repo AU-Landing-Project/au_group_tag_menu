@@ -33,6 +33,9 @@ function init() {
 
 	//register the page to show results
 	elgg_register_page_handler('group_tag_menu', __NAMESPACE__ . '\\group_tag_menu_page_handler');
+	
+	// hook view vars for tags inputs
+	elgg_extend_view('input/tags', 'au_group_tag_menu/tag_extension');
 }
 
 

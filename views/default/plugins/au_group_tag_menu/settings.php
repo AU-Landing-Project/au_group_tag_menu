@@ -20,3 +20,20 @@ echo elgg_view('input/dropdown', array(
 	'value' => $vars['entity']->tagmenu_defaulton,
 ));
 echo '</div>';
+
+
+if (!isset($vars['entity']->tagmenu_autopopulate)) {
+	$vars['entity']->tagmenu_autopopulate = 'yes';
+}
+
+echo '<div>';
+echo elgg_echo('au_group_tag_menu:autopopulate') . ' ';
+echo elgg_view('input/dropdown', array(
+		'name' => 'params[tagmenu_autopopulate]',
+		'options_values' => array(
+				'no' => elgg_echo('option:no'),
+				'yes' => elgg_echo('option:yes')
+		),
+		'value' => $vars['entity']->tagmenu_autopopulate,
+));
+echo '</div>';

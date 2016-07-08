@@ -2,8 +2,10 @@
 
 x.x:
 
-2.1.0 (07/07/2016):
+2.0.0 (07/07/2016):
  - minor updates for Elgg 2.0
+ - pre-populate tag fields of new group content with group tags
+ - plugin setting to disable new functionality if required
 
 1.1.0 (10/23/2015):
  - Elgg 1.9+ upgrade
