@@ -47,7 +47,7 @@ function group_tag_menu_page_handler($page){
 	switch ($page[0]){
 		case 'group':
 			$entity = get_entity($page[1]);
-			$content = elgg_view('resources/au_group_tag_menu/group', array(
+			$content = elgg_view_resource('au_group_tag_menu/group', array(
 				'entity' => $entity,
 				'page' => $page
 			));
