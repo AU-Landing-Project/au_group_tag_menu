@@ -37,3 +37,17 @@ echo elgg_view('input/dropdown', array(
 		'value' => $vars['entity']->tagmenu_autopopulate,
 ));
 echo '</div>';
+
+if ($vars['entity']->tagmenu_autopopulate != 'yes') {
+	echo elgg_view_field([
+		'#type' => 'dropdown',
+		'#label' => elgg_echo('au_group_tag_menu:suggest'),
+		'name' => 'params[tagmenu_suggest]',
+		'value' => $vars['entity']->tagmenu_suggest,
+		'options_values' => [
+			'no' => elgg_echo('option:no'),
+			'yes' => elgg_echo('option:yes')
+		],
+		'#help' => elgg_echo('au_group_tag_menu:suggest:help')
+	]);
+}

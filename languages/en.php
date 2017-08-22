@@ -23,5 +23,7 @@ return array(
 	'au_group_tag_menu:defaulton' => "Show the group tag menu by default in all groups: ",
 	'au_group_tag_menu:error:invalid:group' => "Invalid group",
 	'au_group_tag_menu:save:success' => "Group tag settings have been saved",
-	'au_group_tag_menu:autopopulate' => "Auto-populate new group content tag fields?"
+	'au_group_tag_menu:autopopulate' => "Auto-populate new group content tag fields?",
+	'au_group_tag_menu:suggest' => "Use clickable suggested tags?",
+	'au_group_tag_menu:suggest:help' =>  "Give clickable group tags as suggestions for members posting group content"
 );

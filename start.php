@@ -36,6 +36,7 @@ function init() {
 	
 	// hook view vars for tags inputs
 	elgg_extend_view('input/tags', 'au_group_tag_menu/tag_extension');
+	elgg_extend_view('input/tags', 'au_group_tag_menu/tag_suggestions');
 }
 
 
