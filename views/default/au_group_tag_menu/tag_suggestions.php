@@ -24,6 +24,8 @@ if (elgg_get_plugin_setting('tagmenu_suggest', PLUGIN_ID) != 'yes') {
 }
 
 $tags = (array) $group->menu_tags;
+
+$jsrequire = elgg_is_active_plugin('tag_tools') ? 'au_group_tag_suggestions_tag_tools' : 'au_group_tag_suggestions';
 ?>
 <div class="au-tag-menu-suggestions-title elgg-text-help hidden">Group Tag Suggestions</div>
 <div class="au-tag-menu-suggestions">
@@ -32,7 +34,7 @@ $tags = (array) $group->menu_tags;
 	<?php	endforeach; ?>
 </div>
 <script>
-	require(['au_group_tag_suggestions']);
+	//require(['<?= $jsrequire ?>']);
 </script>
 
 
